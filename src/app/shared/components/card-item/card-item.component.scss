@@ -1,0 +1,34 @@
+.card-item {
+  width: 280px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 5px solid;
+  border-radius: 5px;
+
+  mat-card-header {
+    display: flex;
+    justify-content: space-between;
+  }
+  mat-card-content {
+    p {
+      word-break: break-all;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.green {
+  border-color: #107515;
+}
+
+.red {
+  border-color: #e30b0c;
+}

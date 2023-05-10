@@ -1,0 +1,34 @@
+.div-finance {
+  width: 100vw;
+  height: 100vh;
+  background-color: #6d7a8a;
+  display: flex;
+  flex-direction: column;
+  h1 {
+    text-align: center;
+    padding-top: 20px;
+  }
+  .add-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    mat-form-field{
+      font-size: 12px;
+    }
+  }
+  .list-itens {
+    margin: 10px;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .total{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    padding: 0 5px;
+    font-size: 1.2rem;
+    border: 1px solid #fff;
+  }
+}
