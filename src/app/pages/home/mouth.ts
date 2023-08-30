@@ -22,24 +22,32 @@ export default class Mouth {
         text: 'Maio',
       },
       {
-        value: 1,
-        text: 'Janeiro',
+        value: 6,
+        text: 'Junho',
       },
       {
-        value: 1,
-        text: 'Janeiro',
+        value: 7,
+        text: 'Julho',
       },
       {
-        value: 1,
-        text: 'Janeiro',
+        value: 8,
+        text: 'Agosto',
       },
       {
-        value: 1,
-        text: 'Janeiro',
+        value: 9,
+        text: 'Setembro',
       },
       {
-        value: 1,
-        text: 'Janeiro',
+        value: 10,
+        text: 'Outubro',
+      },
+      {
+        value: 11,
+        text: 'Novembro',
+      },
+      {
+        value: 12,
+        text: 'Dezembro',
       },
     ];
   }

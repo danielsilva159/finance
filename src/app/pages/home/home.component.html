@@ -1,15 +1,59 @@
 <div class="div-finance">
   <h1>Sistema de finanças</h1>
-  <div class="add-item">
-    <button mat-raised-button color="primary" (click)="addItem()">Adicionar item</button>
+  <div class="menus">
+    <div class="add-item">
+      <button mat-raised-button color="primary" (click)="addItem()">Adicionar item</button>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Meses do ano</mat-label>
+        <mat-select [formControl]="selected"(selectionChange)="otherMouth()">
+          <mat-option *ngFor="let mes of meses" [value]="mes.value">
+            {{mes.text}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
   </div>
+
   <div class="list-itens">
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
-    <app-card-item></app-card-item>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="valor">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="data">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element"> {{element.data | date: 'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipo === 1? 'Receita': 'Dispesa'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{verde: row.tipo === 1, vermelho: row.tipo === 2}" ></tr>
+    </table>
   </div>
-  <div class="total"><span>Total: </span><span>R$ 6000,00</span></div>
+  <div class="total"><span>Total: </span><span>R$ {{total.toFixed(2)}} </span></div>
 </div>

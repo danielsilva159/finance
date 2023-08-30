@@ -8,22 +8,23 @@
     text-align: center;
     padding-top: 20px;
   }
-  .add-item {
+  .menus {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
-    mat-form-field{
-      font-size: 12px;
+    margin: 0 10px;
+    .add-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px;
+      mat-form-field {
+        font-size: 12px;
+      }
     }
   }
   .list-itens {
-    margin: 10px;
-    display: grid;
-    gap: 40px;
-    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0px 10px;
   }
-
-  .total{
+  .total {
     display: flex;
     justify-content: space-between;
     margin: 10px;
@@ -31,4 +32,15 @@
     font-size: 1.2rem;
     border: 1px solid #fff;
   }
+}
+td {
+  font-size: 20px;
+}
+
+.verde {
+  background-color: #00ff00;
+}
+
+.vermelho {
+  background-color: #ff0000;
 }
