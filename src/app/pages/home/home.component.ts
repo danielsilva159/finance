@@ -4,7 +4,7 @@ import { CreateItemComponent } from 'src/app/shared/dialog/create-item/create-it
 import { Item } from 'src/app/shared/interfaces/item.interface';
 import Mouth from './mouth';
 import { FormControl, Validators } from '@angular/forms';
-import { ItemService } from 'src/app/services/item.service';
+import { ItemService } from 'src/app/shared/services/item.service';
 
 @Component({
   selector: 'app-home',
@@ -27,9 +27,6 @@ export class HomeComponent implements OnInit {
   ]);
   constructor(private dialog: MatDialog, private itemService: ItemService) {}
   ngOnInit(): void {
-    console.log(this.mesSelecionada);
-
-    console.log(this.meses);
     this.listar();
   }
 
@@ -60,8 +57,6 @@ export class HomeComponent implements OnInit {
             }
           });
           this.total = this.receita - this.dispesa;
-          console.log(this.receita);
-          console.log(this.dispesa);
         });
     }
   }

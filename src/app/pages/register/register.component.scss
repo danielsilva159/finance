@@ -30,9 +30,18 @@ div {
       margin: 0 10px;
       font-size: 1.2rem;
     }
+    button :disabled,
+    button[disabled] {
+      background-color: #a9a9a9;
+    }
     p {
       padding: 10px 0;
       margin: 10px 10px;
+    }
+    a {
+      margin: 10px 10px;
+      color: #0000ff;
+      cursor: pointer;
     }
   }
 }

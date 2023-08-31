@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ItemService } from 'src/app/services/item.service';
+import { ItemService } from 'src/app/shared/services/item.service';
 import { Item } from '../../interfaces/item.interface';
 import { createMask } from '@ngneat/input-mask';
 
