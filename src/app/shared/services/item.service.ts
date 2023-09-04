@@ -15,4 +15,8 @@ export class ItemService {
   list(mes: number) {
     return this.http.get(this.rota, { params: { mouth: mes } });
   }
+
+  excluir(id: number) {
+    return this.http.delete(`${this.rota}/${id}`);
+  }
 }

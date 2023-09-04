@@ -12,7 +12,7 @@ import { ItemService } from 'src/app/shared/services/item.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'valor', 'data', 'tipo'];
+  displayedColumns: string[] = ['id', 'nome', 'valor', 'data', 'tipo', 'acoes'];
   dataSource: Item[] = [];
   receita: number = 0;
   dispesa: number = 0;
@@ -66,5 +66,21 @@ export class HomeComponent implements OnInit {
       (mes) => this.selected.value === mes.value
     );
     this.listar();
+  }
+
+  deletar(id: number) {
+    this.itemService.excluir(id).subscribe(() => {
+      this.listar();
+    });
+  }
+  editar(item: Item) {
+    this.dialog
+      .open(CreateItemComponent, {
+        data: item,
+      })
+      .afterClosed()
+      .subscribe(() => {
+        this.listar();
+      });
   }
 }

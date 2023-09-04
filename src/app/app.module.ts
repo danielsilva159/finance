@@ -24,6 +24,9 @@ import { CreateItemComponent } from './shared/dialog/create-item/create-item.com
 import { CurrencyMaskDirective } from './shared/directive/currency-mask.directive';
 import { InputMaskModule } from '@ngneat/input-mask';
 import { registerLocaleData } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+
 import ptBr from '@angular/common/locales/pt';
 
 registerLocaleData(ptBr);
@@ -56,6 +59,8 @@ registerLocaleData(ptBr);
     MatTableModule,
     HttpClientModule,
     InputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
+    MatSnackBarModule,
+    MatIconModule,
   ],
   exports: [CurrencyMaskDirective],
   providers: [MatDatepickerModule, { provide: LOCALE_ID, useValue: 'pt' }],
