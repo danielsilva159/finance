@@ -58,12 +58,14 @@ export class CreateItemComponent implements OnInit {
 
   salvar() {
     const item: Item = {
-      id: this.data.id,
       nome: this.form.controls.name.value as string,
       data: this.form.controls.date.value as Date,
       tipo: Number(this.form.controls.type.value),
       valor: this.form.controls.money.value as number,
     };
+    if (this.data) {
+      item.id = this.data.id;
+    }
     this.itemService.add(item).subscribe(() => {
       this.message.showMessage('item salvo com sucesso');
       this.close();

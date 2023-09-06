@@ -1,7 +1,4 @@
 .div-finance {
-  width: 100vw;
-  height: 100vh;
-  background-color: #6d7a8a;
   display: flex;
   flex-direction: column;
   h1 {
@@ -45,6 +42,15 @@ td {
   background-color: #ff0000;
 }
 
+.disabled {
+  background-color: #e0e0e0;
+  color: #e0e0e0;
+}
+
 .curso-pointer {
   cursor: pointer;
+}
+
+.mat-mdc-row:hover {
+  background-color: none !important;
 }

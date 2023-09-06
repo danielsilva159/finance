@@ -5,6 +5,7 @@ import { Item } from 'src/app/shared/interfaces/item.interface';
 import Mouth from './mouth';
 import { FormControl, Validators } from '@angular/forms';
 import { ItemService } from 'src/app/shared/services/item.service';
+import { MessageService } from 'src/app/shared/services/message.service';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,20 @@ import { ItemService } from 'src/app/shared/services/item.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'valor', 'data', 'tipo', 'acoes'];
+  displayedColumns: string[] = [
+    'id',
+    'nome',
+    'valor',
+    'data',
+    'tipo',
+    'acoes',
+    'pago',
+  ];
   dataSource: Item[] = [];
   receita: number = 0;
   dispesa: number = 0;
   total = 0;
+  pago = false;
   meses = Mouth.prototype.config();
   mesSelecionada = this.meses.find(
     (mes) => new Date().getMonth() + 1 === mes.value
@@ -25,7 +35,11 @@ export class HomeComponent implements OnInit {
     Validators.required,
     Validators.pattern('valid'),
   ]);
-  constructor(private dialog: MatDialog, private itemService: ItemService) {}
+  constructor(
+    private dialog: MatDialog,
+    private itemService: ItemService,
+    private message: MessageService
+  ) {}
   ngOnInit(): void {
     this.listar();
   }
@@ -46,11 +60,11 @@ export class HomeComponent implements OnInit {
       this.itemService
         .list(this.mesSelecionada.value)
         .subscribe((data: any) => {
+          console.log(data);
+
           this.dataSource = data;
           data.forEach((item: any) => {
             if (item.tipo === 1) {
-              console.log(typeof item.valor);
-
               this.receita = this.receita + parseFloat(item.valor);
             } else {
               this.dispesa = this.dispesa + parseFloat(item.valor);
@@ -82,5 +96,12 @@ export class HomeComponent implements OnInit {
       .subscribe(() => {
         this.listar();
       });
+  }
+
+  itemPago(item: Item, pago: boolean) {
+    item.pago = pago;
+    this.itemService.add(item).subscribe(() => {
+      this.message.showMessage('item salvo com sucesso');
+    });
   }
 }

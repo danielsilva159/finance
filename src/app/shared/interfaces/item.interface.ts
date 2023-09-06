@@ -4,4 +4,5 @@ export interface Item {
   data: Date;
   valor: number;
   tipo: number;
+  pago?: boolean;
 }

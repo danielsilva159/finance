@@ -26,6 +26,8 @@ import { InputMaskModule } from '@ngneat/input-mask';
 import { registerLocaleData } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 import ptBr from '@angular/common/locales/pt';
 
@@ -61,6 +63,8 @@ registerLocaleData(ptBr);
     InputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
     MatSnackBarModule,
     MatIconModule,
+    MatCheckboxModule,
+    FormsModule,
   ],
   exports: [CurrencyMaskDirective],
   providers: [MatDatepickerModule, { provide: LOCALE_ID, useValue: 'pt' }],
