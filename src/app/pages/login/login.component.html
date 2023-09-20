@@ -1,16 +1,16 @@
 <div>
-  <form class="form-login">
+  <form class="form-login" [formGroup]="form">
     <h1>Login</h1>
-    <mat-form-field class="field-email" appearance="outline">
+    <mat-form-field class="field-email" appearance="outline" >
       <mat-label>Digite seu e-mail</mat-label>
-      <input matInput type="text" />
+      <input matInput type="text" formControlName="email" />
     </mat-form-field>
 
     <mat-form-field class="field-password" appearance="outline">
       <mat-label>Digite sua senha</mat-label>
-      <input matInput type="password" />
+      <input matInput type="password" formControlName="password" />
     </mat-form-field>
-    <button mat-raised-button [disabled]="true">Enviar</button>
+    <button mat-raised-button [disabled]="!form.valid" (click)="login()">Enviar</button>
     <p>Não e registrado? <a  (click)="register()">Crie uma conta</a></p>
     <p><a>Esqueci a senha</a></p>
   </form>

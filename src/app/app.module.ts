@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 
 import ptBr from '@angular/common/locales/pt';
+import { TokenInterceptor } from './shared/services/interceptors/token.interceptor';
 
 registerLocaleData(ptBr);
 
@@ -67,7 +68,11 @@ registerLocaleData(ptBr);
     FormsModule,
   ],
   exports: [CurrencyMaskDirective],
-  providers: [MatDatepickerModule, { provide: LOCALE_ID, useValue: 'pt' }],
+  providers: [
+    MatDatepickerModule,
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
