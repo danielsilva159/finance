@@ -12,8 +12,8 @@ export class ItemService {
   add(item: Item) {
     return this.http.post(this.rota, item);
   }
-  list(mes: number) {
-    return this.http.get(this.rota, { params: { mouth: mes } });
+  list(id: string, mes: number, ano: number) {
+    return this.http.get(this.rota, { params: { mouth: mes, id, year: ano } });
   }
 
   excluir(id: number) {

@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.userService.logar(user).subscribe((usuario: any) => {
       if (usuario) {
         localStorage.setItem('token', JSON.stringify(usuario.access_token));
-        localStorage.setItem('usuario', JSON.stringify(usuario.payload));
+        localStorage.setItem('usuario', JSON.stringify(usuario.user));
         this.route.navigate(['/']);
       }
     });

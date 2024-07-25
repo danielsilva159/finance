@@ -6,6 +6,9 @@ import Mouth from './mouth';
 import { FormControl, Validators } from '@angular/forms';
 import { ItemService } from 'src/app/shared/services/item.service';
 import { MessageService } from 'src/app/shared/services/message.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import UsuarioLogado from 'src/app/shared/interfaces/usuarioLogado.interface';
+import Years from './years';
 
 @Component({
   selector: 'app-home',
@@ -31,16 +34,25 @@ export class HomeComponent implements OnInit {
   mesSelecionada = this.meses.find(
     (mes) => new Date().getMonth() + 1 === mes.value
   );
+  anoSelecionado = new Date().getFullYear();
+  anos = Years.prototype.config();
   selected = new FormControl(this.mesSelecionada?.value, [
     Validators.required,
     Validators.pattern('valid'),
   ]);
+  selectedAno = new FormControl(this.anoSelecionado, Validators.required);
+
   constructor(
     private dialog: MatDialog,
     private itemService: ItemService,
-    private message: MessageService
+    private message: MessageService,
+    private userService: UserService
   ) {}
+  usuarioLogado: UsuarioLogado = this.userService.obterUsuarioLogado;
+
   ngOnInit(): void {
+    console.log(new Date().getFullYear());
+
     this.listar();
   }
 
@@ -58,7 +70,11 @@ export class HomeComponent implements OnInit {
       this.receita = 0;
       this.dispesa = 0;
       this.itemService
-        .list(this.mesSelecionada.value)
+        .list(
+          this.usuarioLogado.id,
+          this.selected.value as number,
+          this.selectedAno.value as number
+        )
         .subscribe((data: any) => {
           console.log(data);
 
@@ -73,13 +89,6 @@ export class HomeComponent implements OnInit {
           this.total = this.receita - this.dispesa;
         });
     }
-  }
-
-  otherMouth() {
-    this.mesSelecionada = this.meses.find(
-      (mes) => this.selected.value === mes.value
-    );
-    this.listar();
   }
 
   deletar(id: number) {
@@ -103,5 +112,8 @@ export class HomeComponent implements OnInit {
     this.itemService.add(item).subscribe(() => {
       this.message.showMessage('item salvo com sucesso');
     });
+  }
+  sair() {
+    this.userService.deslogar();
   }
 }

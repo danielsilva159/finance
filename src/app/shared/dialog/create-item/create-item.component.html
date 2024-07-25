@@ -2,9 +2,11 @@
 <div mat-dialog-content>
   <form class="add-item" [formGroup]="form">
     <mat-form-field class="nome-item" appearance="outline">
-      <input type="text" matInput placeholder="Digite o nome do item.:" formControlName="name" autocomplete="false">
+      <mat-label>Nome.:</mat-label>
+      <input type="text" matInput placeholder="Digite o nome do item.:" formControlName="name" [autocomplete]="false">
     </mat-form-field>
     <mat-form-field class="money-item" appearance="outline">
+      <mat-label>Valor.:</mat-label>
       <input type="text" matInput placeholder="Digite o valor do item.:" formControlName="money" [inputMask]="currencyInputMask" ui-money-mask autocomplete="false" mask>
     </mat-form-field>
     <mat-form-field class="data-item" appearance="outline">
@@ -14,9 +16,14 @@
 
     </mat-form-field>
     <mat-radio-group aria-label="Selecione uma opção" formControlName="type">
+      <mat-label>Tipo.:</mat-label>
       <mat-radio-button value="1">Receita</mat-radio-button>
       <mat-radio-button value="2">Despesa</mat-radio-button>
     </mat-radio-group>
+    <mat-form-field class="quantidade-parcelas" appearance="outline">
+      <mat-label>Parcelas.:</mat-label>
+      <input type="number" matInput  formControlName="parcela">
+    </mat-form-field>
     <div class="action">
       <button type="submit" mat-raised-button color="primary" (keyup.enter)="salvar()" (click)="salvar()" [disabled]="!form.valid">Salvar</button>
       <button type="button" mat-raised-button (click)="close()">Cancelar</button>

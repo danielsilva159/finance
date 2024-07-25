@@ -5,6 +5,7 @@ import { ItemService } from 'src/app/shared/services/item.service';
 import { Item } from '../../interfaces/item.interface';
 import { createMask } from '@ngneat/input-mask';
 import { MessageService } from '../../services/message.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-item',
@@ -36,12 +37,14 @@ export class CreateItemComponent implements OnInit {
     date: new FormControl(new Date(), [Validators.required]),
     type: new FormControl('2', [Validators.required]),
     money: new FormControl(0, [Validators.required]),
+    parcela: new FormControl(1, Validators.required),
   });
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<CreateItemComponent>,
     private itemService: ItemService,
-    private message: MessageService
+    private message: MessageService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -62,13 +65,23 @@ export class CreateItemComponent implements OnInit {
       data: this.form.controls.date.value as Date,
       tipo: Number(this.form.controls.type.value),
       valor: this.form.controls.money.value as number,
+      user: this.userService.obterUsuarioLogado,
+      installments: this.form.controls.parcela.value as number,
     };
+    console.log(item);
+
     if (this.data) {
       item.id = this.data.id;
     }
-    this.itemService.add(item).subscribe(() => {
-      this.message.showMessage('item salvo com sucesso');
-      this.close();
+
+    this.itemService.add(item).subscribe({
+      next: () => {
+        this.message.showMessage('item salvo com sucesso');
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      complete: () => this.close(),
     });
   }
 

@@ -44,13 +44,6 @@ export class TokenInterceptor implements HttpInterceptor {
           ok = 'Sessão expirada';
           this.userService.deslogar();
         },
-      }),
-      // Log when response observable either completes or errors
-      finalize(() => {
-        const elapsed = Date.now() - started;
-        const msg = `${request.method} "${request.urlWithParams}"
-           ${ok} in ${elapsed} ms.`;
-        this.mensagem.showMessage(msg);
       })
     );
   }

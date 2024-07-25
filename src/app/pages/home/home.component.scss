@@ -1,6 +1,20 @@
 .div-finance {
   display: flex;
   flex-direction: column;
+  .div-user {
+    display: flex;
+    margin: 10px 15px 0 0;
+    justify-content: flex-end;
+    span {
+      margin-right: 10px;
+    }
+    a {
+      cursor: pointer;
+    }
+    a:hover {
+      border-bottom: 1px solid #000;
+    }
+  }
   h1 {
     text-align: center;
     padding-top: 20px;
@@ -15,6 +29,11 @@
       margin: 10px;
       mat-form-field {
         font-size: 12px;
+      }
+    }
+    .data {
+      mat-form-field {
+        margin-right: 10px;
       }
     }
   }
@@ -49,8 +68,4 @@ td {
 
 .curso-pointer {
   cursor: pointer;
-}
-
-.mat-mdc-row:hover {
-  background-color: none !important;
 }
