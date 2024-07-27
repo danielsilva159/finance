@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
     'pago',
   ];
   dataSource: Item[] = [];
-  receita: number = 0;
-  dispesa: number = 0;
+  entrada: number = 0;
+  saida: number = 0;
   total = 0;
   pago = false;
   meses = Mouth.prototype.config();
@@ -67,8 +67,8 @@ export class HomeComponent implements OnInit {
 
   listar() {
     if (this.mesSelecionada) {
-      this.receita = 0;
-      this.dispesa = 0;
+      this.entrada = 0;
+      this.saida = 0;
       this.itemService
         .list(
           this.usuarioLogado.id,
@@ -76,18 +76,15 @@ export class HomeComponent implements OnInit {
           this.selectedAno.value as number
         )
         .subscribe((data: Item[]) => {
-          console.log(data);
-
-          data.forEach((item: Item, index) => {
-            item.id = index + 1;
+          this.dataSource = data;
+          this.dataSource.forEach((item: Item, index) => {
             if (item.tipo === 1) {
-              this.receita = this.receita + parseFloat(item.valor.toString());
+              this.entrada = this.entrada + parseFloat(item.valor.toString());
             } else {
-              this.dispesa = this.dispesa + parseFloat(item.valor.toString());
+              this.saida = this.saida + parseFloat(item.valor.toString());
             }
-            this.dataSource = data;
           });
-          this.total = this.receita - this.dispesa;
+          this.total = this.entrada - this.saida;
         });
     }
   }
