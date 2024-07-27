@@ -17,12 +17,14 @@
     </mat-form-field>
     <mat-radio-group aria-label="Selecione uma opção" formControlName="type">
       <mat-label>Tipo.:</mat-label>
-      <mat-radio-button value="1">Receita</mat-radio-button>
-      <mat-radio-button value="2">Despesa</mat-radio-button>
+      <mat-radio-button value="1">Entrada</mat-radio-button>
+      <mat-radio-button value="2">Saída</mat-radio-button>
     </mat-radio-group>
     <mat-form-field class="quantidade-parcelas" appearance="outline">
       <mat-label>Parcelas.:</mat-label>
-      <input type="number" matInput  formControlName="parcela">
+      <input type="number" matInput  formControlName="parcela" >
+      <mat-hint *ngIf="form.controls.parcela.hasError('min')">Valor minimo e 1</mat-hint>
+
     </mat-form-field>
     <div class="action">
       <button type="submit" mat-raised-button color="primary" (keyup.enter)="salvar()" (click)="salvar()" [disabled]="!form.valid">Salvar</button>

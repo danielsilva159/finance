@@ -22,6 +22,10 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate: [UsuarioAutenticadoGuard],
   },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
 
 @NgModule({

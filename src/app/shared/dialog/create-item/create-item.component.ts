@@ -37,7 +37,7 @@ export class CreateItemComponent implements OnInit {
     date: new FormControl(new Date(), [Validators.required]),
     type: new FormControl('2', [Validators.required]),
     money: new FormControl(0, [Validators.required]),
-    parcela: new FormControl(1, Validators.required),
+    parcela: new FormControl(1, [Validators.required, Validators.min(1)]),
   });
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
