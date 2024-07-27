@@ -75,16 +75,17 @@ export class HomeComponent implements OnInit {
           this.selected.value as number,
           this.selectedAno.value as number
         )
-        .subscribe((data: any) => {
+        .subscribe((data: Item[]) => {
           console.log(data);
 
-          this.dataSource = data;
-          data.forEach((item: any) => {
+          data.forEach((item: Item, index) => {
+            item.id = index + 1;
             if (item.tipo === 1) {
-              this.receita = this.receita + parseFloat(item.valor);
+              this.receita = this.receita + parseFloat(item.valor.toString());
             } else {
-              this.dispesa = this.dispesa + parseFloat(item.valor);
+              this.dispesa = this.dispesa + parseFloat(item.valor.toString());
             }
+            this.dataSource = data;
           });
           this.total = this.receita - this.dispesa;
         });
