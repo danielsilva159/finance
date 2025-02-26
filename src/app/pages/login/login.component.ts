@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/shared/interfaces/user.interface';
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   constructor(
     private readonly route: Router,
     private fb: FormBuilder,
@@ -21,9 +21,6 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]],
   });
 
-  ngOnInit(): void {
-    console.log(this.form);
-  }
   login() {
     const user: User = {
       email: this.form.controls.email.value as string,

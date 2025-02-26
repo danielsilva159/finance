@@ -19,6 +19,7 @@ export class UsuarioNaoAutenticadoGuard implements CanActivate {
       this.router.navigate(['']);
       return false;
     }
+
     return true;
   }
 }

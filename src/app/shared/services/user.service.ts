@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-  rota = 'http://localhost:3000/user';
+  rota = 'http://localhost:3005/user';
   constructor(private http: HttpClient, private router: Router) {}
 
   create(user: User) {
@@ -15,7 +15,6 @@ export class UserService {
   }
 
   logar(user: User) {
-    console.log(user);
     return this.http.post(`${this.rota}/login`, user);
   }
 
@@ -25,7 +24,7 @@ export class UserService {
       : null;
   }
 
-  get obterTokenUsuario(): string {
+  get obterTokenUsuario(): string | null {
     return localStorage.getItem('token')
       ? JSON.parse(localStorage.getItem('token') as string)
       : null;

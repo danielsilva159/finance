@@ -26,13 +26,11 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = this.userService.obterTokenUsuario;
     const started = Date.now();
     let ok: string;
-    console.log(token);
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(request);
 
     return next.handle(request).pipe(
       tap({
@@ -40,8 +38,8 @@ export class TokenInterceptor implements HttpInterceptor {
         next: (event) =>
           (ok = event instanceof HttpResponse ? 'succeeded' : ''),
         // Operation failed; error is an HttpErrorResponse
-        error: (error) => {
-          ok = 'Sessão expirada';
+        error: (error: HttpErrorResponse) => {
+          this.mensagem.showMessage(error.error.message);
           this.userService.deslogar();
         },
       })

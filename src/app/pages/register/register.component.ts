@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
+import { MessageService } from 'src/app/shared/services/message.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,8 @@ export class RegisterComponent {
 
   constructor(
     private readonly route: Router,
-    private readonly userService: UserService
+    private readonly userService: UserService,
+    private message: MessageService
   ) {}
 
   voltar() {
@@ -26,8 +29,15 @@ export class RegisterComponent {
   }
 
   salvar() {
-    this.userService.create(this.form.value as User).subscribe(() => {
-      console.log('foi');
+    this.userService.create(this.form.value as User).subscribe({
+      next: () => {
+        this.message.showMessage('Usuario Registrado com sucesso');
+        this.route.navigate(['/login']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.message.showMessage(error.error.message);
+        this.form.reset();
+      },
     });
   }
 }

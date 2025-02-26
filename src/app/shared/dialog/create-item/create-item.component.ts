@@ -68,7 +68,6 @@ export class CreateItemComponent implements OnInit {
       user: this.userService.obterUsuarioLogado,
       installments: this.form.controls.parcela.value as number,
     };
-    console.log(item);
 
     if (this.data) {
       item.id = this.data.id;
@@ -79,7 +78,7 @@ export class CreateItemComponent implements OnInit {
         this.message.showMessage('item salvo com sucesso');
       },
       error: (error) => {
-        console.log(error);
+        this.message.showMessage('error ao salvar item');
       },
       complete: () => this.close(),
     });

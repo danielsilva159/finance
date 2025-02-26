@@ -48,7 +48,6 @@ export class CurrencyMaskDirective {
     }
 
     this.ngControl.valueAccessor?.writeValue('$' + newVal);
-    console.log(this.toNumber(newVal));
   }
 
   toNumber(val: any) {

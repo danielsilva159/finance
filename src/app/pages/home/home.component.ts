@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
     Validators.pattern('valid'),
   ]);
   selectedAno = new FormControl(this.anoSelecionado, Validators.required);
+  usuarioLogado: UsuarioLogado;
 
   constructor(
     private dialog: MatDialog,
@@ -48,11 +49,9 @@ export class HomeComponent implements OnInit {
     private message: MessageService,
     private userService: UserService
   ) {}
-  usuarioLogado: UsuarioLogado = this.userService.obterUsuarioLogado;
 
   ngOnInit(): void {
-    console.log(new Date().getFullYear());
-
+    this.usuarioLogado = this.userService.obterUsuarioLogado;
     this.listar();
   }
 

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ItemService {
-  rota = 'http://localhost:3000/item';
+  rota = 'http://localhost:3005/item';
   constructor(private http: HttpClient) {}
 
   add(item: Item) {
